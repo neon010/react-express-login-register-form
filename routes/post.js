@@ -5,7 +5,7 @@ const verify = require("./verifyTokens");
 router.get("/", verify, (req,res)=>{
     res.json({
         post:{
-            title:"my post 1",
+            title:"my post 2",
             description:"this is private"
         }
     })
