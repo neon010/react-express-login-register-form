@@ -3,7 +3,7 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 
 const app = express();
-app.use(cors());
+//app.use(cors());
 app.use(express.json());
 
 //for env file
@@ -24,14 +24,12 @@ mongoose.connect(uri, {useNewUrlParser: true,
     };
 });
 
-//Import Routes
-const authRouter = require("./routes/auth");
-const postRouter = require("./routes/post");
+
 
 
 //Routes middlewares
-app.use("/api/auth/user", authRouter);
-app.use("/api/post", postRouter);
+app.use(require("./routes/auth"));
+app.use(require("./routes/post"));
 
 app.listen(port, ()=>{
     console.log(`server is running at ${port}`);

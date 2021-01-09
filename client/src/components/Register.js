@@ -1,33 +1,86 @@
 import React, {useState} from "react";
-import axios from "axios";
+import { Link , useHistory} from "react-router-dom";
 
 function  Register() {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const history = useHistory();
+
+
     return (
-        <div>
-            <div>
-                <h2>Register Page</h2>
+        <div className="bg-gray-800 mt-10 m-auto w-2/4 h-auto shadow-xl rounded-md">
+            <div className="mt-4 ml-2 ">
+                <h1 className="text-4xl text-white">User Auth Demo</h1>
             </div>
-            <form onSubmit={(event)=>{
+            <div className="mt-10 ml-2">
+                <h2 className="text-2xl text-white">Register</h2>
+            </div>
+            <hr className="mt-2"/>
+            <div className="mt-2 flex justify-end mr-2">
+                <p className="text-green-700">Forget Password?</p>
+            </div>
+            <form 
+            className="ml-2 mt-2 mr-2"
+            onSubmit={(event)=> {
                 event.preventDefault();
-                const user = {
-                    name: name,
-                    email: email,
-                    password: password
-                }
-                axios.post('http://localhost:5000/api/auth/user/register', user)
-                    .then(res=> console.log(res))
-                    .catch(error=> console.log(error))
-                console.log(event.type);
-            }
-            }>
-                <input type="text" required value={name} onChange={(event)=>setName(event.target.value)} placeholder="Enter your Name"/>
-                <input type="email" required value={email} onChange={(event)=> setEmail(event.target.value)} placeholder="Enter your Email"/>
-                <input type="password" required value={password} onChange={(event) => setPassword(event.target.value)} placeholder="Password"/>
-                <button type="submit">Register</button>
+                //console.log({name,email,password});
+                fetch('/signup',{
+                    method: "post",
+                    headers:{
+                        "Content-Type":"application/json"
+                    },
+                    body: JSON.stringify({name,email,password})
+                }).then(res => res.json())
+                    .then(data=> {
+                        if(data.error){
+                            alert(data.error);
+                        }else{
+                            alert(data.message);
+                            history.push("/login");
+                        }
+                    });
+            }}
+            >   
+                <div className="mt-2">
+                    <input 
+                    type="text" 
+                    required 
+                    value={name} 
+                    onChange={(event)=> setName(event.target.value)}
+                    className="bg-gray-200 appearance-none border-2 border-gray-400 rounded w-full 
+                    py-2 px-4 text-gray-700 leading-tight hover:border-green-800 focus:outline-none focus:bg-white focus:border-teal-500" 
+                    placeholder="Enter your name"
+                />
+                </div>                
+                <div className="mt-2">
+                    <input 
+                    type="text" 
+                    required 
+                    value={email} 
+                    onChange={(event)=> setEmail(event.target.value)}
+                    className="bg-gray-200 appearance-none border-2 border-gray-400 rounded w-full 
+                    py-2 px-4 text-gray-700 leading-tight hover:border-green-800 focus:outline-none focus:bg-white focus:border-teal-500" 
+                    placeholder="Enter your Email"
+                    />
+                </div>
+                <div className="mt-2">
+                    <input 
+                    type="password" 
+                    required 
+                    value={password}
+                    className="bg-gray-200 appearance-none border-2 border-gray-400 rounded w-full 
+                    py-2 px-4 text-gray-700 leading-tight hover:border-green-800 focus:outline-none focus:bg-white focus:border-teal-500" 
+                    onChange={(event) => setPassword(event.target.value)} 
+                    placeholder="password"/>
+                </div>
+                <div className="mt-3">
+                    <button className="bg-green-700 p-3 text-xl text-white rounded hover:opacity-80" type="submit">Register</button>
+                </div>
             </form>
+            <div className="flex justify-center">
+                <Link className="text-2xl text-white mb-4" to="/login">Log In</Link>
+            </div>
         </div>
     )
 }

@@ -1,19 +1,47 @@
-import React from "react";
-import {BrowserRouter as Router, Route} from "react-router-dom";
+import {React, useEffect, createContext,useReducer,useContext} from "react";
+import {BrowserRouter as Router, Route,useHistory, Switch} from "react-router-dom";
+import {reducer, initialState} from "./reducer/userReducer"
 import Navbar from "./components/Navbar";
 import Login from "./components/Login";
-import Register from "./components/Register"
+import Register from "./components/Register";
+import Post  from "./components/Post";
 import './App.css';
 
-function App() {
+export const UserContext = createContext();
+
+const Routing = () =>{
+  const history = useHistory();
+  const {state,dispatch} = useContext(UserContext);
+
+  useEffect(()=>{
+    const user = JSON.parse(localStorage.getItem("user"));
+    if(user){
+      dispatch({type:"USER", payload:user});
+    }else{
+      history.push("/login");
+    }
+  }, []);
+
   return (
+    <Switch>
+          <Route path="/" exact component={Login}/>
+          <Route path="/login" exact component={Login}/>
+          <Route path="/register" exact component={Register}/>
+          <Route path="/post" exact component={Post}/>
+    </Switch>
+  )
+}
+
+function App() {
+  const [state, dispatch] = useReducer(reducer, initialState);
+  
+  return (
+    <UserContext.Provider value={{state, dispatch}}>
     <Router>
-        <Navbar />
-        <br/>
-        <Route path="/" exact component={Login}/>
-        <Route path="/login" exact component={Login}/>
-        <Route path="/register" exact component={Register}/>
+      <Navbar/>
+      <Routing />
     </Router>
+  </UserContext.Provider>
   );
 }
 
