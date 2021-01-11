@@ -75,11 +75,11 @@ function  Register() {
                     placeholder="password"/>
                 </div>
                 <div className="mt-3">
-                    <button className="bg-green-700 p-3 text-xl text-white rounded hover:opacity-80" type="submit">Register</button>
+                    <button className="bg-green-700 p-3 text-xl text-white rounded hover:opacity-80 transform hover:scale-95" type="submit">Register</button>
                 </div>
             </form>
             <div className="flex justify-center">
-                <Link className="text-2xl text-white mb-4" to="/login">Log In</Link>
+                <Link className="text-2xl text-white mb-4 transform hover:scale-105" to="/login">Log In</Link>
             </div>
         </div>
     )

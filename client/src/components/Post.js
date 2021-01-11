@@ -1,19 +1,17 @@
-import React, { useContext } from "react";
+import React, {useContext} from "react";
 import {useHistory} from "react-router-dom";
-import {UserContext} from "../App"
+import {UserContext} from "../App";
 
 function ShowPost(){
     const history = useHistory();
-    const {dispatch} = useContext(UserContext);
+    const {state} = useContext(UserContext);
+    console.log(state);
 
     return (
         <div>
             <div>
-                <button onClick={()=>{
-                    localStorage.clear();
-                    dispatch({type:"CLEAR"})
-                    history.push("/signin");
-                }}>Log out</button>
+                <h2>{state.name}</h2>
+                <h2>{state.email}</h2>
             </div>
         </div>
     )
