@@ -24,12 +24,14 @@ const Routing = () =>{
   }, []);
 
   return (
-    <Switch>
+    <div >
+      <Switch>
           <Route path="/" exact component={Login}/>
           <Route path="/login" exact component={Login}/>
           <Route path="/register" exact component={Register}/>
           <Route path="/post" exact component={Post}/>
-    </Switch>
+      </Switch>
+    </div>
   )
 }
 
@@ -37,12 +39,15 @@ function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   return (
-    <UserContext.Provider value={{state, dispatch}}>
-    <Router>
-      <Navbar/>
-      <Routing />
-    </Router>
-  </UserContext.Provider>
+    <div className="bg-gradient-to-r from-green-400 via-red-500 to-pink-500 min-h-screen">
+      <UserContext.Provider value={{state, dispatch}}>
+        <Router>
+          <Navbar/>
+          <Routing />
+        </Router>
+      </UserContext.Provider>
+    </div>
+
   );
 }
 

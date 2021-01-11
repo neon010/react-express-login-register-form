@@ -72,10 +72,10 @@ function  Login() {
                     <button className="bg-green-700 p-3 text-xl text-white rounded hover:opacity-80 transform hover:scale-95" type="submit">Log In</button>
                 </div>
             </form>
-            <div className="flex justify-center">
+            <div className="flex justify-center mt-4">
                 <p className="text-xl text-white">Dont have an account?</p>
             </div>
-            <div className="flex justify-center">
+            <div className="flex justify-center mb-4">
                 <Link className="text-2xl text-white hover:opacity-80 transform hover:scale-105" to="/register">Register</Link>
             </div>
         </div>

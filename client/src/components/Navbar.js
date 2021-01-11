@@ -22,7 +22,7 @@ function  Navabar() {
         }else{
             return [
                 <li>
-                <Link to="/login" className="lg:p-4 py-3 px-0 block border-b-2 text-2xl text-black border-transparent hover:hover-indigo-400 transform hover:scale-95">Log In</Link>
+                <Link to="/login" className="lg:p-4 py-3 px-0 block border-b-2 text-2xl text-black border-transparent hover:hover-indigo-400 transform hover:scale-95">LogIn</Link>
             </li>,
             <li>
                 <Link to="/register" className="lg:p-4 py-3 px-0 block border-b-2 text-2xl text-black border-transparent hover:hover-indigo-400 transform hover:scale-95">Register</Link>

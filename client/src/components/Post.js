@@ -1,18 +1,29 @@
-import React, {useContext} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import {useHistory} from "react-router-dom";
 import {UserContext} from "../App";
 
 function ShowPost(){
     const history = useHistory();
     const {state} = useContext(UserContext);
-    console.log(state);
+    const [users,setUsers] = useState("");
+
+    useEffect(()=>{
+        fetch("/all-user",{
+            headers:{
+                "auth-token":localStorage.getItem("jwt")
+            }
+        }).then(res=>res.json()).then(data=>setUsers(data.users));
+    },[users]);
 
     return (
         <div>
-            <div>
-                <h2>{state.name}</h2>
-                <h2>{state.email}</h2>
-            </div>
+            <ul>
+                {users.map(obj =>{
+                    return (
+                        <li key={obj.id}>{obj.name}: {obj.email}</li>
+                    )
+                })}
+            </ul>
         </div>
     )
 }
