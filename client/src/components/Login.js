@@ -9,76 +9,74 @@ function  Login() {
     const history = useHistory();
 
     return (
-        <div className="bg-gray-800 mt-10 m-auto w-96 h-96 shadow-2xl rounded-md">
-            <div className="mt-4 ml-2 ">
-                <h1 className="text-4xl text-white">User Auth Demo</h1>
+        <main className="flex flex-col justify-center mt-4 bg-white max-w-lg mx-auto p-8 md:p-12 my-10 rounded-lg shadow-2xl">
+            <div className="flex justify-center mb-3">
+                <h1 className="text-3xl">Demo</h1>
             </div>
-            <div className="mt-10 ml-2">
-                <h2 className="text-2xl text-white">Log In</h2>
+            <div className="">
+                <p className="font-bold text-2xl">Welcome</p>
+                <h2 className="text-gray-600 pt-2">LogIn to your account</h2>
             </div>
-            <hr className="mt-2"/>
-            <div className="mt-2 flex justify-end mr-2 hover:cursor-pointer">
-                <p className="text-green-700">Forget Password?</p>
-            </div>
-            <form 
-            className="ml-2 mt-2 mr-2"
-            onSubmit={(event)=> {
-                event.preventDefault();
-                fetch("/login",{
-                    method: "post",
-                    headers:{
-                        "Content-Type":"application/json"
-                    },
-                    body:JSON.stringify({
-                        password,
-                        email
+            <section className="mt-5">
+                <form 
+                className="flex flex-col"
+                onSubmit={(event)=> {
+                    event.preventDefault();
+                    fetch("/login",{
+                        method: "post",
+                        headers:{
+                            "Content-Type":"application/json"
+                        },
+                        body:JSON.stringify({
+                            password,
+                            email
+                        })
+                    }).then(res => res.json())
+                    .then(data => {
+                        if(data.error){
+                            alert(data.error);
+                        }else{
+                            localStorage.setItem("jwt", data.token);
+                            localStorage.setItem("user", JSON.stringify(data.user));
+                            dispatch({type:"USER", payload:data.user});
+                            history.push("/post");
+                        }
                     })
-                }).then(res => res.json())
-                .then(data => {
-                    if(data.error){
-                        alert(data.error);
-                    }else{
-                        localStorage.setItem("jwt", data.token);
-                        localStorage.setItem("user", JSON.stringify(data.user));
-                        dispatch({type:"USER", payload:data.user});
-                        history.push("/post");
-                    }
-                })
 
-            }}
-            >
-                <div className="mt-2">
-                    <input 
-                    type="email" 
-                    required 
-                    value={email} 
-                    onChange={(event)=> setEmail(event.target.value)}
-                    className="bg-gray-200 appearance-none border-2 border-gray-400 rounded w-full 
-                    py-2 px-4 text-gray-700 leading-tight hover:border-green-800 focus:outline-none focus:bg-white focus:border-teal-500" 
-                    placeholder="Enter your Email"
-                />
-                </div>
-                <div className="mt-2">
-                    <input 
-                    type="password" 
-                    required 
-                    value={password}
-                    className="bg-gray-200 appearance-none border-2 border-gray-400 rounded w-full 
-                    py-2 px-4 text-gray-700 leading-tight hover:border-green-800 focus:outline-none focus:bg-white focus:border-teal-500" 
-                    onChange={(event) => setPassword(event.target.value)} 
-                    placeholder="password"/>
-                </div>
-                <div className="mt-3">
-                    <button className="bg-green-700 p-3 text-xl text-white rounded hover:opacity-80 transform hover:scale-95" type="submit">Log In</button>
-                </div>
-            </form>
-            <div className="flex justify-center mt-4">
-                <p className="text-xl text-white">Dont have an account?</p>
+                }}
+                >
+                    <div className="mb-6 pt-3 rounded bg-gray-200">
+                        <input 
+                        type="email" 
+                        required 
+                        value={email} 
+                        onChange={(event)=> setEmail(event.target.value)}
+                        className="bg-gray-200 rounded w-full text-gray-700 focus:outline-none border-b-4 border-gray-300 focus:border-purple-600 transition duration-500 px-3 pb-3" 
+                        placeholder="Enter your Email"
+                    />
+                    </div>
+                    <div className="mb-6 pt-3 rounded bg-gray-200">
+                        <input 
+                        type="password" 
+                        required 
+                        value={password}
+                        className="bg-gray-200 rounded w-full text-gray-700 focus:outline-none border-b-4 border-gray-300 focus:border-purple-600 transition duration-500 px-3 pb-3" 
+                        onChange={(event) => setPassword(event.target.value)} 
+                        placeholder="password"/>
+                    </div>
+                    <div className="flex justify-end">
+                        <p className="text-sm text-purple-600 hover:text-purple-700 hover:underline mb-2">Forget Password?</p>
+                    </div>
+                    <button className="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 rounded shadow-lg hover:shadow-xl transition duration-200" type="submit">Log In</button>
+                </form>
+            </section>
+            <div className="flex justify-center items-center mt-4">
+                <p className="">Dont have an account?</p>
             </div>
-            <div className="flex justify-center mb-4">
-                <Link className="text-2xl text-white hover:opacity-80 transform hover:scale-105" to="/register">Register</Link>
+            <div className="flex justify-center items-center text-xl">
+                <Link className="text-xl hover:underline hover:text-purple-700" to="/register">Register</Link>
             </div>
-        </div>
+        </main>
         
     )
 }

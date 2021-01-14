@@ -11,7 +11,7 @@ function  Navabar() {
             return (
                 [
                     <button 
-                    className="lg:p-4 py-3 px-0 block border-b-2 text-2xl text-black border-transparent outline-none"
+                    className="lg:p-4 py-3 px-0 block border-b-2 text-2xl text-white text-black border-transparent outline-none"
                     onClick={()=>{
                         localStorage.clear();
                         dispatch({type:"CLEAR"})
@@ -22,10 +22,10 @@ function  Navabar() {
         }else{
             return [
                 <li>
-                <Link to="/login" className="lg:p-4 py-3 px-0 block border-b-2 text-2xl text-black border-transparent hover:hover-indigo-400 transform hover:scale-95">LogIn</Link>
+                <Link to="/login" className="lg:p-4 py-3 px-0 block border-b-2 text-2xl text-white text-black border-transparent transform hover:scale-95">LogIn</Link>
             </li>,
             <li>
-                <Link to="/register" className="lg:p-4 py-3 px-0 block border-b-2 text-2xl text-black border-transparent hover:hover-indigo-400 transform hover:scale-95">Register</Link>
+                <Link to="/register" className="lg:p-4 py-3 px-0 block border-b-2 text-2xl text-white text-black border-transparent transform hover:scale-95">Register</Link>
             </li>
             ]
         }
@@ -34,7 +34,7 @@ function  Navabar() {
     return (
         <header className="lg:px-16 px-6 bg-purple-600 bg-opacity-75 flex flex-wrap items-center lg:py-0 py-2">
             <div className="flex-1 flex justify-between items-center">
-                <Link to="/" className="Nav-brand">UserAuth Demo</Link>
+                <Link to="/" className="text-white text-2xl">Demo</Link>
             </div>
             <div className="flex  items-center">
                 <ul className="lg:flex  lg:items-center text-base text-gray-700 pt-4 lg:pt-0 text-xl">

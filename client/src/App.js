@@ -39,7 +39,7 @@ function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   return (
-    <div className="bg-gradient-to-r from-green-400 via-red-500 to-pink-500 min-h-screen">
+    <div >
       <UserContext.Provider value={{state, dispatch}}>
         <Router>
           <Navbar/>

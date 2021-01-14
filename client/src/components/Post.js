@@ -1,30 +1,46 @@
 import React, {useContext, useEffect, useState} from "react";
-import {useHistory} from "react-router-dom";
+//import {useHistory} from "react-router-dom";
 import {UserContext} from "../App";
 
 function ShowPost(){
-    const history = useHistory();
+    //const history = useHistory();
     const {state} = useContext(UserContext);
-    const [users,setUsers] = useState("");
+    const [users, setUsers] = useState([]);
 
     useEffect(()=>{
         fetch("/all-user",{
             headers:{
                 "auth-token":localStorage.getItem("jwt")
             }
-        }).then(res=>res.json()).then(data=>setUsers(data.users));
-    },[users]);
+        }).then(res=> res.json()).then(data=> setUsers(Array.from(data.users)));
+    },[]);
+
+    console.log(typeof(users));
 
     return (
-        <div>
-            <ul>
-                {users.map(obj =>{
-                    return (
-                        <li key={obj.id}>{obj.name}: {obj.email}</li>
-                    )
-                })}
-            </ul>
+        <div className="mt-10 flex justify-center">
+            <table className="table-fixed border-collapse border border-black">
+                <thead>
+                    <tr>
+                        <th className="border border-green-600 ">id</th>
+                        <th className="border border-green-600 ">Name</th>
+                        <th className="border border-green-600 ">Email</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {users.map(obj => {
+                        return (
+                        <tr className="border border-green-600">
+                            <td className="border border-green-600">{obj.id}</td>
+                            <td className="border border-green-600">{obj.name}</td>
+                            <td className="border border-green-600 text-underline">{obj.email}</td>
+                        </tr>
+                        )
+                    })}
+                </tbody>
+            </table>
         </div>
+
     )
 }
 export default ShowPost

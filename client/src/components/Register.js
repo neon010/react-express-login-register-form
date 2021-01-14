@@ -9,17 +9,15 @@ function  Register() {
 
 
     return (
-        <div className="bg-gray-800 mt-10 m-auto w-2/4 h-auto shadow-xl rounded-md">
-            <div className="mt-4 ml-2 ">
-                <h1 className="text-4xl text-white">User Auth Demo</h1>
+        <main className="flex flex-col justify-center mt-4 bg-white max-w-lg mx-auto p-8 md:p-12 my-10 rounded-lg shadow-2xl">
+            <div className="mt-4 ml-2 flex justify-center items-center">
+                <h1 className="text-4xl text-black">Demo</h1>
             </div>
             <div className="mt-10 ml-2">
-                <h2 className="text-2xl text-white">Register</h2>
+                <h2 className="text-2xl text-black">Register</h2>
             </div>
             <hr className="mt-2"/>
-            <div className="mt-2 flex justify-end mr-2">
-                <p className="text-green-700">Forget Password?</p>
-            </div>
+
             <form 
             className="ml-2 mt-2 mr-2"
             onSubmit={(event)=> {
@@ -78,10 +76,11 @@ function  Register() {
                     <button className="bg-green-700 p-3 text-xl text-white rounded hover:opacity-80 transform hover:scale-95" type="submit">Register</button>
                 </div>
             </form>
-            <div className="flex justify-center">
-                <Link className="text-2xl text-white mb-4 transform hover:scale-105" to="/login">Log In</Link>
+            <div className="flex flex-col justify-center items-center">
+                <p>Already have an account?</p>
+                <Link className="text-2xl text-black mb-4 transform hover:scale-105" to="/login">Log In</Link>
             </div>
-        </div>
+        </main>
     )
 }
 
