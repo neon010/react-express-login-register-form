@@ -1,10 +1,13 @@
 import React, {useState} from "react";
 import { Link , useHistory} from "react-router-dom";
 
+
 function  Register() {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [errMsg, setErrMsg] = useState("");
+    const [showError, setShowError] = useState("hidden");
     const history = useHistory();
 
 
@@ -32,7 +35,8 @@ function  Register() {
                 }).then(res => res.json())
                     .then(data=> {
                         if(data.error){
-                            alert(data.error);
+                            setShowError("block");
+                            setErrMsg(data.error);
                         }else{
                             alert(data.message);
                             history.push("/login");
@@ -72,13 +76,23 @@ function  Register() {
                     onChange={(event) => setPassword(event.target.value)} 
                     placeholder="password"/>
                 </div>
+                <div
+                    className = {`${showError} text-red-600 px-3 py-4 border-b-2 border-red-800 shadow-2xl flex justify-between items-center`}>
+                    {errMsg}
+                    <svg fill="currentColor" className="h-8 w-8 hover:text-red-700" viewBox="0 0 20 20">
+                    <path fillRule="evenodd"
+                    d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
+                    clipRule="evenodd"></path>
+                    </svg>
+                </div>
                 <div className="mt-3">
-                    <button className="bg-green-700 p-3 text-xl text-white rounded hover:opacity-80 transform hover:scale-95" type="submit">Register</button>
+                    <button className="bg-green-700 p-3 text-xl text-white rounded hover:opacity-80 hover:outline-none focus:outline-none transform hover:scale-95" type="submit">Register</button>
                 </div>
             </form>
-            <div className="flex flex-col justify-center items-center">
+            <hr className="mt-4"/>
+            <div className="flex flex-col justify-center items-center mt-2">
                 <p>Already have an account?</p>
-                <Link className="text-2xl text-black mb-4 transform hover:scale-105" to="/login">Log In</Link>
+                <Link className="text-2xl text-black mb-2 transform hover:scale-105" to="/login">Log In</Link>
             </div>
         </main>
     )

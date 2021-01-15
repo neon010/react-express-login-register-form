@@ -11,7 +11,7 @@ function  Navabar() {
             return (
                 [
                     <button 
-                    className="lg:p-4 py-3 px-0 block border-b-2 text-2xl text-white text-black border-transparent outline-none"
+                    className="lg:p-4 py-3 px-0 block border-b-2 text-2xl text-white text-black border-transparent focus:outline-none"
                     onClick={()=>{
                         localStorage.clear();
                         dispatch({type:"CLEAR"})
@@ -21,16 +21,15 @@ function  Navabar() {
             )
         }else{
             return [
-                <li>
-                <Link to="/login" className="lg:p-4 py-3 px-0 block border-b-2 text-2xl text-white text-black border-transparent transform hover:scale-95">LogIn</Link>
+                <li key="1">
+                <Link to="/login" className="lg:p-4 py-3 px-0  block border-b-2 text-2xl text-white text-black border-transparent transform hover:scale-95">LogIn</Link>
             </li>,
-            <li>
+            <li key="2">
                 <Link to="/register" className="lg:p-4 py-3 px-0 block border-b-2 text-2xl text-white text-black border-transparent transform hover:scale-95">Register</Link>
             </li>
             ]
         }
     }
-    console.log(state);
     return (
         <header className="lg:px-16 px-6 bg-purple-600 bg-opacity-75 flex flex-wrap items-center lg:py-0 py-2">
             <div className="flex-1 flex justify-between items-center">

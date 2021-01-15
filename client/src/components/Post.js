@@ -15,25 +15,25 @@ function ShowPost(){
         }).then(res=> res.json()).then(data=> setUsers(Array.from(data.users)));
     },[]);
 
-    console.log(typeof(users));
+    //console.log(typeof(users));
 
     return (
         <div className="mt-10 flex justify-center">
             <table className="table-fixed border-collapse border border-black">
                 <thead>
-                    <tr>
-                        <th className="border border-green-600 ">id</th>
-                        <th className="border border-green-600 ">Name</th>
-                        <th className="border border-green-600 ">Email</th>
+                    <tr key="ghjhm">
+                        <th className="border border-blue-600 ">id</th>
+                        <th className="border border-blue-600 ">Name</th>
+                        <th className="border border-blue-600 ">Email</th>
                     </tr>
                 </thead>
                 <tbody>
                     {users.map(obj => {
                         return (
-                        <tr className="border border-green-600">
-                            <td className="border border-green-600">{obj.id}</td>
-                            <td className="border border-green-600">{obj.name}</td>
-                            <td className="border border-green-600 text-underline">{obj.email}</td>
+                        <tr className="border border-blue-600" key={obj.id}>
+                            <td className="border border-blue-600">{obj.id}</td>
+                            <td className="border border-blue-600">{obj.name}</td>
+                            <td className="border border-blue-600 text-underline">{obj.email}</td>
                         </tr>
                         )
                     })}

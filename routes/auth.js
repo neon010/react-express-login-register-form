@@ -11,7 +11,7 @@ router.post("/signup", async(req,res)=>{
     //checking if user with the same password exist in db
     const emailExist = await User.findOne({email});
     if(emailExist){
-        return res.status(422).json({error:"user already exists with that email"});
+        return res.status(422).json({error:"user already exists"});
     };
 
     //hashing the password
@@ -30,7 +30,6 @@ router.post("/signup", async(req,res)=>{
     } catch (error) {
         res.status(400).json({error:error});
     }    
-    console.log(req.body);
 });
 
 router.post("/login", async (req,res)=>{

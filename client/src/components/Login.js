@@ -5,6 +5,8 @@ import {UserContext} from "../App"
 function  Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [errMsg, setErrMsg] = useState("");
+    const [showError, setShowError] = useState("hidden");
     const {dispatch} = useContext(UserContext);
     const history = useHistory();
 
@@ -34,7 +36,8 @@ function  Login() {
                     }).then(res => res.json())
                     .then(data => {
                         if(data.error){
-                            alert(data.error);
+                            setShowError("block");
+                            setErrMsg(data.error);
                         }else{
                             localStorage.setItem("jwt", data.token);
                             localStorage.setItem("user", JSON.stringify(data.user));
@@ -55,7 +58,7 @@ function  Login() {
                         placeholder="Enter your Email"
                     />
                     </div>
-                    <div className="mb-6 pt-3 rounded bg-gray-200">
+                    <div className="mb-1 pt-3 rounded bg-gray-200">
                         <input 
                         type="password" 
                         required 
@@ -65,9 +68,18 @@ function  Login() {
                         placeholder="password"/>
                     </div>
                     <div className="flex justify-end">
-                        <p className="text-sm text-purple-600 hover:text-purple-700 hover:underline mb-2">Forget Password?</p>
+                        <p className="text-sm text-purple-600 hover:text-purple-700 hover:underline">Forget Password?</p>
                     </div>
-                    <button className="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 rounded shadow-lg hover:shadow-xl transition duration-200" type="submit">Log In</button>
+                    <div
+                    className = {`${showError} text-red-600 px-3 py-2 mb-2 border-b-2 border-red-800 shadow-2xl flex justify-between items-center`}>
+                    {errMsg}
+                        <svg fill="currentColor" className="h-8 w-8 hover:text-red-700" viewBox="0 0 20 20">
+                        <path fillRule="evenodd"
+                        d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
+                        clipRule="evenodd"></path>
+                        </svg>
+                    </div>
+                    <button className="bg-purple-600 mt-2 hover:bg-purple-700 text-white font-bold py-2 rounded shadow-lg hover:shadow-xl hover:outline-none focus:outline-none transition duration-200" type="submit">Log In</button>
                 </form>
             </section>
             <div className="flex justify-center items-center mt-4">
